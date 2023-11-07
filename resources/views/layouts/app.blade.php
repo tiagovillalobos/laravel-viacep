@@ -14,18 +14,22 @@
         <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
 
         <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
+        @stack('css')
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
         
     </head>
 
     <body>
         
-        <div class="container-fluid">
+        <div class="container-fluid py-3">
             @yield('content')
         </div>
 
+        <script src="{{ asset('js/jquery.js') }}"></script>
         <script src="{{ asset('js/bootstrap.bundle.js') }}"></script>
+        @stack('js')
         <script src="{{ asset('js/app.js') }}"></script>
+
     </body>
 
 </html>
