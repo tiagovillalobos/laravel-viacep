@@ -10,6 +10,7 @@ class Input extends Component
 {    
     public string $classes = 'form-control';
     public string $dataAttributes = '';
+
     public string $label;
     public string $name;
     public string $type;
@@ -17,8 +18,9 @@ class Input extends Component
     public string $ajax;
     public bool $optional;
     public string $target;
+    public bool $readonly;
 
-    public function __construct(string $label = '', string $name, string $type = 'text', string $mask = '', string $ajax = '', bool $optional = false, string $target = '')
+    public function __construct(string $label = '', string $name, string $type = 'text', string $mask = '', string $ajax = '', bool $optional = false, string $target = '', bool $readonly = false)
     {
         $this->label = $label;
         $this->name = $name;
@@ -27,6 +29,7 @@ class Input extends Component
         $this->ajax = $ajax;
         $this->optional = $optional;
         $this->target = $target;
+        $this->readonly = $readonly;
 
         $this->addMaskClass();
         $this->addDataAttributes();

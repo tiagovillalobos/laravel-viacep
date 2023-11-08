@@ -10,3 +10,4 @@ Route::get('/', function () : RedirectResponse {
 });
 
 Route::get(uri: '/enderecos/cadastrar', action: [AddressController::class, 'create'])->name(name: 'addresses.create');
+Route::post(uri: '/enderecos', action: [AddressController::class, 'store'])->name(name: 'addresses.store');

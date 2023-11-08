@@ -1,4 +1,5 @@
 <div class="mb-3">
+    
     @if($label)
         <label for="{{ $name }}">
             {{ $label }}
@@ -9,7 +10,15 @@
             @endif
         </label>
     @endif
-    <input type="{{ $type }}" name="{{ $name }}" class="{{ $classes }}" {{ $dataAttributes }}>
+
+    <input 
+        type="{{ $type }}" 
+        name="{{ $name }}" 
+        class="{{ $classes }}" 
+        {{ $dataAttributes }} 
+        {{ $attributes->merge(['readonly' => $readonly]) }}
+    >
+
 </div>
 
 @if($hasMask())
