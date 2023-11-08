@@ -9,7 +9,7 @@
                 <div class="row">
                     <div class="col-lg-3">
 
-                        <x-form.input label="CEP" name="address[zipcode]" mask="zipcode" />
+                        <x-form.input label="CEP" name="address[zipcode]" mask="zipcode" ajax="{{ route('api.viacep.index') }}" />
 
                     </div>
                 </div>

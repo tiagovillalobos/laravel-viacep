@@ -2,7 +2,7 @@
     @if($label)
         <label for="{{ $name }}">{{ $label }}</label>
     @endif
-    <input type="{{ $type }}" name="{{ $name }}" class="{{ $classes }}">
+    <input type="{{ $type }}" name="{{ $name }}" class="{{ $classes }}" {{ $dataAttributes }}>
 </div>
 
 @if($hasMask())
