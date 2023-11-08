@@ -14,6 +14,12 @@ class ViaCepController extends Controller
 
         $response = Http::get("https://viacep.com.br/ws/$zipcode/json/")->json();
 
+        if (isset($response['erro']) && $response['erro'] == true) {
+            return response()->json([
+                'message' => 'CEP não encontrado'
+            ], 404);
+        }
+
         return response()->json($response);
         
     }

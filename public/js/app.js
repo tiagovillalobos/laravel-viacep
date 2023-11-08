@@ -8,6 +8,9 @@ const app = {
 
 	elements: {
 		loaderModal: new bootstrap.Modal(document.getElementById('loader-modal'), { keyboard: false, backdrop: 'static' }),
+		modals: {
+			error: new bootstrap.Modal(document.getElementById('error-modal'), { keyboard: false, backdrop: 'static' }),
+		}
 	},
 
 	masks : {
@@ -65,6 +68,10 @@ const app = {
 
 	},
 
+	setErrorModalText(text) {
+		$('#error-modal').find('#error-modal-text').text(text);
+	},
+
 	setZipcodeInputEvent() {
 
 		$(app.selectors.zipcode).on('keyup', function() {
@@ -95,6 +102,13 @@ const app = {
 
 						app.elements.loaderModal.hide();
 
+					},
+					error: function(error) {
+						console.log(error);
+						app.elements.loaderModal.hide();
+
+						app.setErrorModalText(error.responseJSON.message);
+						app.elements.modals.error.show();
 					}
 				});
 
