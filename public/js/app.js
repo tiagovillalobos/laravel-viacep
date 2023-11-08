@@ -2,7 +2,12 @@ const app = {
 
 	selectors: {
 		masks: '[class*="mask-"]',
-		zipcode: '.mask-zipcode'
+		zipcode: '.mask-zipcode',
+		formControl: '.form-control',
+	},
+
+	elements: {
+		loaderModal: new bootstrap.Modal(document.getElementById('loader-modal'), { keyboard: false, backdrop: 'static' }),
 	},
 
 	masks : {
@@ -14,7 +19,7 @@ const app = {
 	},
 
 	init() {
-		
+
 		app.initMasks();
 		app.setZipcodeInputEvent();
 
@@ -36,7 +41,27 @@ const app = {
 		return $(input).prop('class').split(' ').filter(item => item.includes('mask'))[0].split('-')[1]
 	},
 
-	getAddressByZipcode(zipcode) {
+	clearChildrenInputsAndHideElement(element) {
+		$(element).find(app.selectors.formControl).val('');
+		$(element).addClass('d-none');
+	},
+
+	createAddressObjectFromResponse(response) {
+		
+		return {
+			'street': response.logradouro,
+			'district': response.bairro,
+			'city': response.localidade,
+			'state': response.uf
+		};
+
+	},
+
+	fillAddressFormFieldsWithAddressObject(addressObject) {
+		
+		$.each(addressObject, function(key, value) {
+			$(`[name*="${key}"]`).val(value);
+		});
 
 	},
 
@@ -45,13 +70,15 @@ const app = {
 		$(app.selectors.zipcode).on('keyup', function() {
 
 			let zipcode = $(this).inputmask('unmaskedvalue');
+			let url = $(this).data('ajax');
+			let target = $($(this).data('target'));
 
 			if(zipcode.length === 8) {
 
-				let url = $(this).data('ajax');
+				app.clearChildrenInputsAndHideElement(target);
 
-				url = url.substring(1, url.length - 1);
-				
+				app.elements.loaderModal.show();
+
 				$.ajax({
 					url: url,
 					method: 'GET',
@@ -59,10 +86,23 @@ const app = {
 					data: { zipcode: zipcode },
 					success: function(response) {
 						console.log(response);
+
+						let addressObject = app.createAddressObjectFromResponse(response);
+
+						app.fillAddressFormFieldsWithAddressObject(addressObject);
+
+						target.removeClass('d-none');
+
+						app.elements.loaderModal.hide();
+
 					}
 				});
 
 				
+			} else {
+
+				app.clearChildrenInputsAndHideElement(target);
+
 			}
 
 		});

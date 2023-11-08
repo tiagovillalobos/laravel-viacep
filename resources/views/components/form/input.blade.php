@@ -1,6 +1,13 @@
 <div class="mb-3">
     @if($label)
-        <label for="{{ $name }}">{{ $label }}</label>
+        <label for="{{ $name }}">
+            {{ $label }}
+            @if($optional)
+                <small class="text-muted">
+                    (Opcional)
+                </small>
+            @endif
+        </label>
     @endif
     <input type="{{ $type }}" name="{{ $name }}" class="{{ $classes }}" {{ $dataAttributes }}>
 </div>

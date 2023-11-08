@@ -15,14 +15,18 @@ class Input extends Component
     public string $type;
     public string $mask;
     public string $ajax;
+    public bool $optional;
+    public string $target;
 
-    public function __construct(string $label = '', string $name, string $type = 'text', string $mask = '', string $ajax = '')
+    public function __construct(string $label = '', string $name, string $type = 'text', string $mask = '', string $ajax = '', bool $optional = false, string $target = '')
     {
         $this->label = $label;
         $this->name = $name;
         $this->type = $type;
         $this->mask = $mask;
         $this->ajax = $ajax;
+        $this->optional = $optional;
+        $this->target = $target;
 
         $this->addMaskClass();
         $this->addDataAttributes();
@@ -37,7 +41,8 @@ class Input extends Component
     }
 
     private function addDataAttributes() {
-        if($this->ajax != '') $this->dataAttributes .= ' data-ajax="' . $this->ajax . '"';
+        if($this->ajax != '')   $this->dataAttributes .= " data-ajax=$this->ajax";
+        if($this->target != '') $this->dataAttributes .= " data-target=$this->target";
     }
 
     public function render(): View|Closure|string
