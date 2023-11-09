@@ -8,6 +8,13 @@ use Illuminate\Contracts\View\View;
 
 class AddressController extends Controller
 {
+    public function index() : View
+    {
+        return view(view: 'addresses.index', data: [
+            'addresses' => Address::all(),
+        ]);
+    }
+
     public function create() : View
     {
         return view(view: 'addresses.create');
@@ -18,7 +25,7 @@ class AddressController extends Controller
         Address::create($request->address);
 
         return response()->json([
-            'redirect' => route('addresses.create'),
+            'redirect' => route('addresses.index'),
         ]);
     }
 }

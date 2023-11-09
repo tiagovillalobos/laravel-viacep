@@ -192,8 +192,6 @@ const app = {
 					app.removeLoadingStateFromForm(form);
 				}
 
-				
-
 			},
 			error: function(error) {
 				console.log(error);
