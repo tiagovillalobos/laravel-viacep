@@ -27,6 +27,11 @@
                 @endforeach
             </tbody>
         </table>
+
+        <div class="my-3">
+            {{ $addresses->links() }}
+        </div>
+
     </x-card>
 
 @endsection

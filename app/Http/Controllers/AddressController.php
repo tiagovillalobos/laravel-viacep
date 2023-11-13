@@ -12,7 +12,7 @@ class AddressController extends Controller
     public function index() : View
     {
         return view(view: 'addresses.index', data: [
-            'addresses' => Address::all(),
+            'addresses' => Address::paginate(),
         ]);
     }
 

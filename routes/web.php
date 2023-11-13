@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', function () : RedirectResponse {
-    return redirect()->route(route: 'addresses.create');
+    return redirect()->route(route: 'addresses.index');
 });
 
 Route::get(uri: '/enderecos', action: [AddressController::class, 'index'])->name(name: 'addresses.index');
