@@ -30,8 +30,22 @@ const app = {
 	},
 
 	init() {
+
 		app.initEvents();
 		app.initMasks();
+
+		toastr.options = {
+			progressBar: true
+		};
+
+		let toast = localStorage.getItem('toast');
+
+		if(toast) {
+			toast = JSON.parse(toast);
+			toastr[toast.type](toast.message);
+			localStorage.removeItem('toast');
+		}
+
 	},
 
 	initMasks() {
@@ -184,11 +198,24 @@ const app = {
 			processData: false,
 			contentType: false,
 			success: function(response) {
+
 				console.log(response);
 
+				let toast = response.toast;
+
 				if(response.redirect) {
+
+					if(toast) {
+						localStorage.setItem('toast', JSON.stringify(toast));
+					}
+
 					location = response.redirect;
 				} else {
+
+					if(toast) {
+						toastr[toast.type](toast.message);
+					}
+
 					app.removeLoadingStateFromForm(form);
 				}
 

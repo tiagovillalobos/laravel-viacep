@@ -1,10 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-    
-    <a href="{{ route('addresses.create') }}" class="btn btn-primary">
-        Novo Endereço
-    </a>
 
     <x-card>
         <table class="table">
