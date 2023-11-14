@@ -34,4 +34,9 @@ class Address extends Model
             length: 0
         );
     }
+
+    public function scopeByZipcode($query, string $zipcode)
+    {
+        return $query->where('zipcode', $zipcode);
+    }
 }
